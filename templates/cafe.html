@@ -1,0 +1,95 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('{{cafe.img_url}}')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="post-heading">
+          <h1>{{ cafe.name }}</h1>
+          <h2 class="subheading">{{ cafe.location }}</h2>
+          <span class="meta"
+            >Posted by
+            <!-- Changed from post.author -->
+            <a href="#">{{ cafe.author.name }}</a>
+            on {{ cafe.date }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Post Content -->
+<article>
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        {{ cafe.body|safe }}
+        <div class="card-body pb-5">
+          <p class="card-text"><strong><u>{{ cafe.name }}</u></strong>
+            <br>
+            <img src="/static/assets/img/location-icon.png" height="20"> <a href="{{ cafe.map_url }}">{{ cafe.location }}</a>
+            <br>
+            <img src="/static/assets/img/open-icon.png" height="20"> {{ cafe.open_time.strftime("%H:%M") }} - {{ cafe.close_time.strftime("%H:%M") }}
+            <br>
+            <img src="/static/assets/img/phone-icon.png" height="20"> {{ cafe.phone }}
+            <br>
+            <img src="/static/assets/img/price-icon.png" height="20"> {{ cafe.coffee_price }}
+            <br>
+            <br>
+            <strong>Ratings</strong> (out of 5)
+            <br>
+            <img src="/static/assets/img/bean-icon.png" height="20"> : {{ cafe.coffee_rating }}
+            <br>
+            <img src="/static/assets/img/food-icon.png" height="20"> : {{ cafe.food_rating }}
+            <br>
+            <img src="/static/assets/img/wifi-icon.png" height="20"> : {{ cafe.wifi_rating }}
+            <br>
+            <img src="/static/assets/img/power-icon.png" height="20"> : {{ cafe.power_outlet }}
+          </p>
+        </div>
+        <!--Only show Edit Post button if user id is 1 (admin user) -->
+        {% if current_user.id == 1 %}
+        <div class="d-flex justify-content-end mb-4">
+          <a
+            class="btn btn-warning float-right"
+            href="{{url_for('edit_cafe', cafe_id=cafe.id)}}"
+            >Edit Cafe</a
+          >
+        </div>
+        {% endif %}
+
+        <!-- Comments Area -->
+        <!-- Load the CKEditor -->
+        {{ ckeditor.load() }}
+        <!-- Configure it with the name of the form field from CommentForm -->
+        {{ ckeditor.config(name='comment_text') }}
+        <!-- Create the wtf quick form from CommentForm -->
+        {{ render_form(form, novalidate=True, button_map={"submit": "warning"}) }}
+        <div class="comment">
+          <ul class="commentList">
+            <!-- Show all comments -->
+            {% for comment in cafe.comments: %}
+            <li>
+              <div class="commenterImage">
+                <img
+                  src="https://www.gravatar.com/avatar/94d093eda664addd6e450d7e9881bcad?s=32&d=identicon&r=PG"
+                />
+              </div>
+              <div class="commentText">
+                {{comment.text|safe}}
+                <span class="sub-text">{{comment.comment_author.name}}</span>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+{% include "footer.html" %}

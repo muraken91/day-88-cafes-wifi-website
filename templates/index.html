@@ -1,0 +1,58 @@
+{% include "header.html" %}
+<!-- Page Header-->
+<header
+  class="masthead"
+  style="background-image: url('../static/assets/img/home-bg.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>Find Cafes to Work</h1>
+          <span class="subheading pb-5">A collection of Coffee Shops around Jakarta</span>
+          <a class="btn btn-lg btn-warning" href="{{ url_for('get_all_cafes') }}">Explore Jakarta</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content-->
+<div class="container px-4 py-5 border-bottom" id="featured-3">
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center bg-gradient fs-2 mb-3">
+          <img src="/static/assets/img/laptop-coffee.png" height="70">
+        </div>
+        <h3 class="fs-2 text-body-emphasis">BE PRODUCTIVE</h3>
+        <p>Find venues with reliable <strong>Wi-Fi</strong>, ample <strong>power sockets</strong>, and comfy <strong>seating areas.</strong></p>
+      </div>
+      <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center bg-gradient fs-2 mb-3">
+          <img src="/static/assets/img/coffee-drip.png" height="70">
+        </div>
+        <h3 class="fs-2 text-body-emphasis">ENJOY COFFEE</h3>
+        <p>Discover the <strong>best coffees</strong>, based on the community reviews.</p>
+      </div>
+      <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center bg-gradient fs-2 mb-3">
+          <img src="/static/assets/img/inspired.png" height="70">
+        </div>
+        <h3 class="fs-2 text-body-emphasis">STAY INSPIRED</h3>
+        <p>Uncover new places with <strong>laid-back ambiance</strong>, and <strong>friendly vibes</strong>.</p>
+      </div>
+    </div>
+</div>
+
+<div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="/static/assets/img/cat-laptop.jpg" alt="" width="155" height="139">
+    <h1 class="display-5 fw-bold text-body-emphasis">Get To Work!</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Find Places in Jakarta to comfortably work and enjoy good coffee & good food, to make your day more productive.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a class="btn btn-lg btn-warning" href="{{ url_for('get_all_cafes') }}">Explore Jakarta</a>
+      </div>
+    </div>
+  </div>
+
+{% include "footer.html" %}
